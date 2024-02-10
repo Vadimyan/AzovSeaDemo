@@ -286,3 +286,46 @@ function init() {
 8. Можно смотреть на результат! 
 
 ![Tilda result](img/14_tilda_result.png)
+
+## Меняем отображение
+
+Если просто отображать точки недостаточно, то можно менять цвет меток или отображение внутри всплывающей подсказки. Для примера давай добавим численность косяков рыб и отметим их разным цветом в зависимости от этого параметра.
+
+Во-первых, нужно чтобы в датасете были эти данные. Для тестирования добавь в скрипт генерации недостающее поле:
+
+```python
+# Другой код скрипта генерации тестовых данных
+dataset = [
+    {
+        "lat": round(random.uniform(*lat_range), 5),
+        "long": round(random.uniform(*long_range), 5),
+        "name": random.choice(fish_names),
+        "amount": random.randint(100, 2000) # Новое поле численности
+    }
+    for _ in range(55)
+```
+
+Во-вторых, в html файле с версткой поменяй 2 параметра: то, как формируется balloonContent и то, как ставится пометка. Вот обновленный пример:
+
+```js
+fetch('dataset.json')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(item => {
+            var placemark = new ymaps.Placemark([item.lat, item.long], {
+                balloonContent: `${item.name}<br>Численность: ${item.amount}`
+            }, 
+            {
+                preset: item.amount < 1000 ? 'islands#redIcon' : 'islands#greenIcon'
+            });
+            myMap.geoObjects.add(placemark);
+        });
+    })
+    .catch(error => console.log('Error loading the dataset:', error));
+```
+
+Commit, Sync, Check.
+
+![Colored result](img/15_colored_result.png)
+
+Beautiful.
