@@ -259,3 +259,30 @@ function init() {
 
  ![Карты с разметкой](img/11_github_pages_site.png)
 
+## Добавляем карту с точками на настоящий сайт
+
+Делать сайт своими руками приятно, но долго. Поэтому попробуем разместить карту на нашем лендинге.
+
+1. Заходи на [tilda.cc](https://tilda.cc/).
+2. Регистрируйся/аутентифицируйся.
+3. Создай новый сайт или зайди на существующий.
+4. Создай новую страницу. Например, о компании. 
+5. Для встраивания html понадобится блок Т123 HTML-код
+
+![Tilda html block](img/12_tilda_html-block.png)
+
+6. Теперь нужно зайти в контент блока и добавить html для встраивания iframe с картой из github pages. Поправь адрес сайта в коде и размести в контенте блока.
+
+```html
+<div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+    <iframe src="https://vadimyan.github.io/AzovSeaDemo/" width="800" height="600" frameborder="0" style="border:0;"></iframe>
+</div>
+```
+
+7. Не забудь опубликовать страницу
+
+![Tilda publish](img/13_tilda_publish.png)
+
+8. Можно смотреть на результат! 
+
+![Tilda result](img/14_tilda_result.png)
