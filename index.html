@@ -20,11 +20,14 @@ function init() {
         .then(response => response.json())
         .then(data => {
             data.forEach(item => {
-                var placemark = new ymaps.Placemark([item.lat, item.long], {
-                    balloonContent: item.name
-                });
-                myMap.geoObjects.add(placemark);
+            var placemark = new ymaps.Placemark([item.lat, item.long], {
+                balloonContent: `${item.name}<br>Численность: ${item.amount}`
+            }, 
+            {
+                preset: item.amount < 1000 ? 'islands#redIcon' : 'islands#greenIcon'
             });
+            myMap.geoObjects.add(placemark);
+        });
         })
         .catch(error => console.log('Error loading the dataset:', error));
 }
